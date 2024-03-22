@@ -1,0 +1,53 @@
+Run npx create-react-app entertainment-hub
+
+Install material UI
+Run npm i @material-ui/core @material-ui/icons axios
+
+Run npm i react-router-dom
+
+
+config.js
+Whenever a picture is not received from api, config will provide no found poster/image
+
+API used: https://developer.themoviedb.org/reference/intro/getting-started
+
+visit themoviedb.org and create an account
+Settings => API => Generate an API key
+
+Run npm i @material-ui/lab
+
+Using chip component from maerial ui for Genre
+
+const fetchGenres = async () => {
+        const { data } = await axios.get(
+          `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+        );
+        console.log(data);
+        setGenres([...genres, data.genres]); // This didn't worked
+    };
+    console.log(typeof genres);
+    console.log(Genres.length);
+    console.log(genres);
+
+    {Object.keys(genres).map((genre) => // Converts Object to array then map function is valid
+        <Chip
+          style={{ margin: 2 }}
+          label={genre.name}
+          key={genre.id}
+          clickable
+          size="small"
+        //   onClick={() => handleAdd(genre)}
+        />
+      )}
+
+      The error was due to setGenres({}) which sets the genres as object => genres.map is not a function
+      useEffect(() => {
+        fetchGenres();
+    
+        return () => {
+          setGenres([]); // unmounting
+        };
+        // eslint-disable-next-line
+    }, []);
+
+    Run npm i react-alice-carousel
